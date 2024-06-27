@@ -168,10 +168,20 @@ async function sendData() {
   const storageRef = ref(storage, 'data.json');
   await uploadBytes(storageRef, blob);
   const downloadURL = await getDownloadURL(storageRef);
-  const emailBody = encodeURIComponent(`Data has been uploaded. Download it from: ${downloadURL}`);
-  const mailtoLink = `mailto:jesse.williams@americanautoshield.com?subject=Data Uploaded&body=${emailBody}`;
+
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'EstimateForClaim.json';
+  a.click();
+  URL.revokeObjectURL(url);
+
+//  const emailBody = encodeURIComponent(`Data has been uploaded. Download it from: ${downloadURL}`);
+  const mailtoLink = `mailto:jesse.williams@americanautoshield.com?subject=Data Incoming`;
   window.location.href = mailtoLink;
-  alert('Data sent!');
+  alert('Success!');
 }
 
 // Expose functions to global scope

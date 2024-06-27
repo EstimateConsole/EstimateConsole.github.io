@@ -8,24 +8,28 @@
             margin-right: 25px;
             padding: 20px;
         }
+        
         table {
             border-collapse: collapse;
             margin: 10px 25px;
             text-align: center;
         }
+
         th.totalData, td.totalData {
             padding: 10px;
-
         }
+
         th {
             padding: 10px;
             background-color: #34495e;
             border: 1px solid #34495e;
         }
+
         td {
             background-color: #3b5998;
             border: 1px solid #34495e;
         }
+
         button {
             background-color: #2980b9;
             color: #ecf0f1;
@@ -34,73 +38,90 @@
             cursor: pointer;
             margin: 0px;
         }
+
         button:hover {
             background-color: #3498db;
         }
+
         .container {
             display: flex;
             justify-content: center;
             width: 100%;
         }
+
         .containerRight {
             display: inline-block;
             position: absolute;
             top: 350px;
             right: 130px;
         }
+
         #partsTable {
             width: 40vw;
         }
+
         #laborTable {
             width: 24vw;
         }
+
         .totals {
             width: 15vw;
         }
+
         input[type="number"] {
             width: 100px;
         }
+
         .shift {
             margin-left: 25px;
         }
+
         .SLStrio {
             width: 120px;
             margin: 5px;
         }
+
         .tableDiv {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
+
         .issues {
             text-align: center;
             width: 300px;
             margin-right: 20px;
         } 
+
         .issues input { 
             width: 100px;
             margin-right: 10px;
         }
+
         .issuesheader {
             text-align: center;
             margin-right: 30px;
         }
+
         .issueslabel {
             text-align: right;
             float: right;
             margin-right: 10px;
             line-height: 1.9;
         }
+
         .issuesinput {
             margin-top:2px;
             float: right;
         }
+
         .corner {
             display: inline-block;
             position: absolute;
             top: 600px;
             right: 160px;
         }
+        
         .instruction {
             display: inline-block;
             position: absolute;

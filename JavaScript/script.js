@@ -170,6 +170,15 @@ async function sendData() {
   const downloadURL = await getDownloadURL(storageRef);
 
 
+  makeJsonDownload(data);
+
+//  const emailBody = encodeURIComponent(`Data has been uploaded. Download it from: ${downloadURL}`);
+  const mailtoLink = `mailto:jesse.williams@americanautoshield.com?subject=Data Incoming`;
+  window.location.href = mailtoLink;
+  alert('Success!');
+}
+
+function makeJsonDownload(data) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -177,11 +186,6 @@ async function sendData() {
   a.download = 'EstimateForClaim.json';
   a.click();
   URL.revokeObjectURL(url);
-
-//  const emailBody = encodeURIComponent(`Data has been uploaded. Download it from: ${downloadURL}`);
-  const mailtoLink = `mailto:jesse.williams@americanautoshield.com?subject=Data Incoming`;
-  window.location.href = mailtoLink;
-  alert('Success!');
 }
 
 // Expose functions to global scope

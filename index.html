@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parts and Labor Management</title>
+    <link rel="stylesheet" href="CSS/styles.css?v=20240625171239">
+  <style>
+  </style>
+</head>
+  <body>
+    <div class="container">
+      <div>
+        <h1 class="shift">Parts Table</h1>
+        <table id="partsTable">
+          <thead>
+            <tr>
+              <th>Part Number</th>
+              <th>Part Name</th>
+              <th>Price Each</th>
+              <th>Quantity</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text"></td>
+              <td><input type="text"></td>
+              <td><input type="number" step="0.01"></td>
+              <td><input type="number" min="1" step="1"></td>
+              <td><button onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="shift" onclick="addPartRow()">Add Part</button>
+      </div>
+      <div>
+        <h1 class="shift">Labor Table</h1>
+        <table id="laborTable">
+          <thead>
+            <tr>
+              <th>Labor Description</th>
+              <th>Hours</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text"></td>
+              <td><input type="number" step="0.01" min="0"></td>
+              <td><button onclick="deleteRow(this)">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="shift" onclick="addLaborRow()">Add Labor</button>
+      </div>
+      <div>
+        <h1 class="shift">Totals</h1>
+        <table id="moneyTable" class="totals">
+          <tr>
+            <td class="totalData">Total Parts:</td>
+            <td class="totalData" id="totalParts">$0.00</td>
+          </tr>
+          <tr>
+            <td class="totalData">Total Labor:</td>
+            <td class="totalData" id="totalLabor">$0.00</td>
+          </tr>
+          <tr>
+            <td class="totalData">SubTotal:</td>
+            <td class="totalData" id="subTotal">$0.00</td>
+          </tr>
+          <tr>
+            <td class="totalData">Tax:</td>
+            <td class="totalData" id="taxTotal">$0.00</td>
+          </tr>
+          <tr>
+            <td class="totalData">Grand Total:</td>
+            <td class="totalData" id="grandTotal">$0.00</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="containerRight">
+      <h1 class="issuesheader">Other</h1>
+      <div class="butcleanup">
+        <div class="issues">
+          <div class="issuesinput">
+            <input type="number" id="laborRate" step="0.01" min="0" style="margin-bottom: 10px;"><br>
+            <input type="number" id="parttaxRate" step="0.001" min="0" style="margin-bottom: 10px;" value="0"><br>
+            <input type="number" id="labortaxRate" step="0.001" min="0" style="margin-bottom: 10px;" value="0"><br>
+            <input type="tel" id="phoneNumber" style="margin-bottom: 10px;">
+          </div>
+          <div class="issueslabel">
+            <label for="laborRate">Labor Rate:</label><br>
+            <label for="parttaxRate">Tax Rate on Parts:</label><br>
+            <label for="labortaxRate">Tax Rate on Labor:</label><br>
+            <label for="phoneNumber">Callback Number:</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="corner">
+      <button class="SLStrio" onclick="saveData()">Save</button><br>
+      <button class="SLStrio" onclick="loadData()">Load</button><br>
+      <button class="SLStrio" onclick="sendData()">Download File</button>
+    </div>
+    <div class="instruction">
+      <h1>Instructions:</h1>
+      Enter Part Number, Part Name, Price, and Quantity for each part<br>
+      Enter Labor Description and Hours for each labor and diagnostic line.<br>
+      Enter your tax rate on parts and labor as a percentage. Leave blank if not applicable.<br>
+      Enter your Labor Rate and a phone number where we can reach you.<br>
+      The 'Add Part' button generates a new part line.<br>
+      The 'Add Labor' button adds a new labor line.<br>
+      The 'Delete' buttons remove the line the button is on.<br>
+      The 'Save' button saves all entered information.<br>
+      The 'Load' button enters the saved data into the tables.<br>
+      The 'Download' button will generate a file which you can download and email to your adjuster.<br>
+    </div>
+    <script type="module" src="JavaScript/firebase.js?v=20240625171239""></script>
+    <script type="module" src="JavaScript/script.js?v=20240625171239"></script>
+  </body>
+</html>
+
+
+
+
+
+

@@ -125,6 +125,11 @@ function loadData() {
 }
 
 async function sendData() {
+  function generateReferenceKey() {
+    const randomNum = Math.floor(10000000 + Math.random() * 90000000);
+    return 'RK' + randomNum;
+  }
+
   const partsRows = document.querySelectorAll('#partsTable tbody tr');
   const partsData = [];
   partsRows.forEach(row => {
@@ -136,6 +141,7 @@ async function sendData() {
       partsData.push({ partNumber, partName, priceEach, quantity });
     }
   });
+
   const laborRows = document.querySelectorAll('#laborTable tbody tr');
   const laborData = [];
   laborRows.forEach(row => {
@@ -145,13 +151,16 @@ async function sendData() {
       laborData.push({ laborDescription, hours });
     }
   });
+
   const laborRate = document.getElementById('laborRate').value;
   const totalParts = document.getElementById('totalParts').textContent;
   const totalLabor = document.getElementById('totalLabor').textContent;
   const subTotal = document.getElementById('subTotal').textContent;
   const taxTotal = document.getElementById('taxTotal').textContent;
   const grandTotal = document.getElementById('grandTotal').textContent;
-  const data = {
+  const referenceKey = generateReferenceKey();
+
+  const claimInfo = {
     partsData,
     laborData,
     laborRate,
@@ -163,27 +172,29 @@ async function sendData() {
       grandTotal
     }
   };
+
+  const data = {
+    reference_Key: referenceKey,
+    claim_info: [claimInfo]
+  };
+
   const jsonData = JSON.stringify(data);
   const blob = new Blob([jsonData], { type: 'application/json' });
-  const storageRef = ref(storage, 'data.json');
+  const storageRef = ref(storage, `uploads/${referenceKey}.json`);
   await uploadBytes(storageRef, blob);
   const downloadURL = await getDownloadURL(storageRef);
 
+  makeJsonFile(data, referenceKey);
 
-  makeJsonDownload(data);
-
-//  const emailBody = encodeURIComponent(`Data has been uploaded. Download it from: ${downloadURL}`);
-  const mailtoLink = `mailto:jesse.williams@americanautoshield.com?subject=Data Incoming`;
-  window.location.href = mailtoLink;
-  alert('Success!');
+  alert('Success! Provide your Adjuster with this Key: ' + referenceKey);
 }
 
-function makeJsonDownload(data) {
+function makeJsonFile(data, referenceKey) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'EstimateForClaim.json';
+  a.download = `${referenceKey}.json`;
   a.click();
   URL.revokeObjectURL(url);
 }
